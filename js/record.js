@@ -213,7 +213,7 @@ function createDownloadLink(blob) {
 
 }
 
-function pitchshifter(upload) {
+// function pitchshifter(upload) {
 // console.log("start pitch");
 audio = new Tone.Player(url).connect(pitchShift); //ここがうまくいきません
 
@@ -243,4 +243,4 @@ audio = new Tone.Player(url).connect(pitchShift); //ここがうまくいきま�
   document.querySelector("tone-slider").addEventListener("input", e => {
       pitchShift.pitch = parseFloat(e.target.value);
   });
-}
+// }
