@@ -11,7 +11,7 @@ var li = document.createElement('li');
 var link = document.createElement('a');
 
 
-// shim for AudioContext when it's not avb. 
+// shim for AudioContext when it's not avb.
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext //audio context to help us record
 
@@ -37,11 +37,11 @@ function startRecording() {
 		Simple constraints object, for more advanced audio features see
 		https://addpipe.com/blog/audio-constraints-getusermedia/
 	*/
-    
+
     var constraints = { audio: true, video:false }
 
  	/*
-    	Disable the record button until we get a success or fail from getUserMedia() 
+    	Disable the record button until we get a success or fail from getUserMedia()
 	*/
 
 	recordButton.disabled = true;
@@ -49,7 +49,7 @@ function startRecording() {
 	pauseButton.disabled = false
 
 	/*
-    	We're using the standard promise based getUserMedia() 
+    	We're using the standard promise based getUserMedia()
     	https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
 	*/
 
@@ -64,16 +64,16 @@ function startRecording() {
 		*/
 		audioContext = new AudioContext();
 
-		//update the format 
+		//update the format
 		document.getElementById("formats").innerHTML="Format: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
 
 		/*  assign to gumStream for later use  */
 		gumStream = stream;
-		
+
 		/* use the stream */
 		input = audioContext.createMediaStreamSource(stream);
 
-		/* 
+		/*
 			Create the Recorder object and configure to record mono sound (1 channel)
 			Recording 2 channels  will double the file size
 		*/
@@ -98,7 +98,7 @@ function pauseRecording(){
 		//pause
 		rec.stop();
         pauseButton.innerHTML="Resume";
-        
+
 	}else{
 		//resume
 		rec.record()
@@ -123,7 +123,7 @@ function stopRecording() {
 
 	//reset button just in case the recording is stopped while paused
 	pauseButton.innerHTML="Pause";
-	
+
 	//tell the recorder to stop the recording
 	rec.stop();
 
@@ -165,8 +165,8 @@ function createDownloadLink(blob) {
 	// 	  console.log(url);
 	// 	});
 	//   }
-	
-	
+
+
 	//add controls to the <audio> element
 	au.controls = true;
 	au.src = url;
@@ -179,16 +179,16 @@ function createDownloadLink(blob) {
 
 	//add the new audio element to li
 	li.appendChild(au);
-	
+
 	//add the filename to the li
 	li.appendChild(document.createTextNode(filename+".wav "))
 
 	//add the save to disk link to li
 	li.appendChild(link);
-	
+
 	//upload link
 	var upload = document.createElement('a');
-    upload.href="#";
+  upload.href="#";
 	upload.innerHTML = "Upload";
 	upload.addEventListener("click", function(event){
           var xhr = new XMLHttpRequest(); //HAVING ISSUES WITH XMLHTTPREQUEST
@@ -210,26 +210,26 @@ function createDownloadLink(blob) {
 
 	//add the li element to the ol
     recordingsList.appendChild(li);
-    
+
 }
 
 function pitchshifter(upload) {
 // console.log("start pitch");
-audio = new Tone.Player(upload).connect(pitchShift);
-  
+audio = new Tone.Player(url).connect(pitchShift); //ここがうまくいきません
+
   const pitchShift = new Tone.PitchShift().toDestination(); //Connect the output to the context's destination node.
   console.log("pitchShift");
-  
+
   player.loop = true; //creates a looped callback at the specified interval
-  
+
   const toneFFT = new Tone.FFT(); //Get the current frequency data of the connected audio source using a fast Fourier transform.
   pitchShift.connect(toneFFT); //connect to toneFFT
   fft({
         parent: document.querySelector("#content"),
       tone: toneFFT,
   });
-  
-  
+
+
   // bind the interface
   document.querySelector("tone-play-toggle").addEventListener("start", () => player.start());
 
@@ -239,7 +239,7 @@ audio = new Tone.Player(upload).connect(pitchShift);
   // document.querySelector("tone-play-toggle").addEventListener('start', () => {
   // 	debugger;
   // });
-  
+
   document.querySelector("tone-slider").addEventListener("input", e => {
       pitchShift.pitch = parseFloat(e.target.value);
   });
