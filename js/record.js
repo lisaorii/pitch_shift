@@ -149,6 +149,7 @@ function createDownloadLink(blob) {
 function pitchshifter(upload) {
   audio = new Tone.Player(url).connect(pitchShift); //ここがうまくいきません
 
+
   const pitchShift = new Tone.PitchShift().toDestination(); //Connect the output to the context's destination node.
   player.loop = true; //creates a looped callback at the specified interval
 
@@ -165,4 +166,4 @@ function pitchshifter(upload) {
   document.querySelector("tone-slider").addEventListener("input", e => {
     pitchShift.pitch = parseFloat(e.target.value);
   });
-}
+// }
