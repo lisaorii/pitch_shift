@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<title>Pitch Shift</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.4.3/webcomponents-bundle.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet"/>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">
+
+	<script src="js/Tone.js"></script>
+	<script src="js/tone-ui.js"></script>
+	<script src="js/components.js"></script>
+</head>
+<body>
+	<style>
+		tone-slider {
+			width: 100%;
+			margin-top: 10px;
+		}
+	</style>
+  	<h1>
+      project name
+    </h1>
+
+    <div id="buttons">
+		<button id="recordButton">Record</button>
+		<button id="pauseButton" disabled>Pause</button>
+		<button id="stopButton" disabled>Stop</button>
+	  <!-- <button class="record">Record</button>
+	  <button class="pause">Pause</button>
+      <button class="stop">Stop</button> -->
+	</div>
+	<!-- <tone-example label="Microphone">
+		<div slot="explanation">
+			If supported, Tone.UserMedia uses <code>getUserMedia</code> to open the user's microphone where it can then be processed with Tone.js. Only works on https domains.
+		</div>
+
+		<div id="content">
+			<tone-mic-button></tone-mic-button>
+		</div>
+	</tone-example> -->
+
+	<section class="sound-clips"></section> 
+	<div id="formats">Format: start recording to see sample rate</div>
+	<p><strong>Recordings:</strong></p>
+  	<ol id="recordingsList"></ol>
+
+	<tone-example label="Pitch Shift">
+		<tone-loader></tone-loader>
+		<div id="content">
+			<tone-play-toggle></tone-play-toggle>
+			<tone-slider label="pitch" min="-12" max="12" value="0" units="hz"></tone-slider>
+		</div>
+	</tone-example>
+
+  <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+  <script src="js/record.js"></script>
+
+    <!-- function playSound() {
+      const audioURL = fetchUrl();
+      const pitchShift = new Tone.PitchShift().toDestination(); //Connect the output to the context's destination node.
+  		const player = new Tone.Player(audioURL).connect(pitchShift); //connect to pitchShift node
+  		player.loop = true; //creates a looped callback at the specified interval
+
+  		const toneFFT = new Tone.FFT(); //Get the current frequency data of the connected audio source using a fast Fourier transform.
+  		pitchShift.connect(toneFFT); //connect to toneFFT
+  		fft({
+  			parent: document.querySelector("#content"),
+  			tone: toneFFT,
+  		});
+    }
+    playSound();
+
+		// bind the interface
+		document.querySelector("tone-play-toggle").addEventListener("start", () => player.start());
+		document.querySelector("tone-play-toggle").addEventListener("stop", () => player.stop());
+		// document.querySelector("tone-play-toggle").addEventListener('start', () => {
+		// 	debugger;
+		// });
+
+		document.querySelector("tone-slider").addEventListener("input", e => {
+			pitchShift.pitch = parseFloat(e.target.value);
+		}); -->
+
+	</script> -->
+
+</body>
+</html>
