@@ -25,7 +25,6 @@ stopButton.addEventListener("click", stopRecording);
 pauseButton.addEventListener("click", pauseRecording);
 
 function startRecording() {
-  console.log("recordButton clicked");
   recordButton.style.background = "red";
   stopButton.style.background = "";
   pauseButton.style.background = "";
@@ -37,8 +36,6 @@ function startRecording() {
   pauseButton.disabled = false
 
   navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-    console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
-
     audioContext = new AudioContext();
 
     //update the format
@@ -53,9 +50,6 @@ function startRecording() {
 
     //start the recording process
     rec.record()
-
-    console.log("Recording started");
-
   }).catch(function(err) {
     //enable the record button if getUserMedia() fails
     recordButton.disabled = false;
@@ -65,7 +59,6 @@ function startRecording() {
 }
 
 function pauseRecording(){
-  console.log("pauseButton clicked rec.recording=",rec.recording );
   if (rec.recording){
     //pause
     rec.stop();
@@ -83,7 +76,6 @@ function pauseRecording(){
 }
 
 function stopRecording() {
-  console.log("stopButton clicked");
   recordButton.style.background = "";
   stopButton.style.background = "red";
   pauseButton.style.background = "";
@@ -107,13 +99,10 @@ function stopRecording() {
 }
 
 function createDownloadLink(blob) {
-
   url = URL.createObjectURL(blob);
   // $('div').html(blobVal);
   //name of .wav file to use during upload and download (without extendion)
   var filename = new Date().toISOString();
-
-  console.log(url);
 
   //add controls to the <audio> element
   au.controls = true;
@@ -121,7 +110,6 @@ function createDownloadLink(blob) {
 
   //save to disk link
   link.href = url;
-  // console.log(link.href);
   link.download = filename+".wav"; //download forces the browser to donwload the file using the  filename
   link.innerHTML = "Save to disk";
 
@@ -140,14 +128,11 @@ function createDownloadLink(blob) {
   upload.innerHTML = "Upload";
   upload.addEventListener("click", function(event){
     var xhr = new XMLHttpRequest(); //HAVING ISSUES WITH XMLHTTPREQUEST
-    console.log("request");
     xhr.onload = function(e) {
-      console.log("on load");
       if(this.readyState === 4) {
         console.log("Server returned: ",e.target.responseText);
       }
     };
-    console.log("done");
     var fd=new FormData();
     fd.append("audio_data",blob, filename);
     xhr.open("POST","upload.php",true);
@@ -162,12 +147,9 @@ function createDownloadLink(blob) {
 }
 
 function pitchshifter(upload) {
-  // console.log("start pitch");
   audio = new Tone.Player(url).connect(pitchShift); //ここがうまくいきません
 
   const pitchShift = new Tone.PitchShift().toDestination(); //Connect the output to the context's destination node.
-  console.log("pitchShift");
-
   player.loop = true; //creates a looped callback at the specified interval
 
   const toneFFT = new Tone.FFT(); //Get the current frequency data of the connected audio source using a fast Fourier transform.
@@ -177,11 +159,8 @@ function pitchshifter(upload) {
     tone: toneFFT,
   });
 
-
   // bind the interface
   document.querySelector("tone-play-toggle").addEventListener("start", () => player.start());
-
-  // console.log("play");
   document.querySelector("tone-play-toggle").addEventListener("stop", () => player.stop());
   document.querySelector("tone-slider").addEventListener("input", e => {
     pitchShift.pitch = parseFloat(e.target.value);
