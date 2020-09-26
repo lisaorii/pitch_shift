@@ -1,65 +1,65 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-	<title>Pitch Shift</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <head>
+    <meta charset="utf-8">
+    <title>Pitch Shift</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.4.3/webcomponents-bundle.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet"/>
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.4.3/webcomponents-bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8">
 
-	<script src="js/Tone.js"></script>
-	<script src="js/tone-ui.js"></script>
-	<script src="js/components.js"></script>
-</head>
-<body>
-	<style>
-		tone-slider {
-			width: 100%;
-			margin-top: 10px;
-		}
-	</style>
-  	<h1>
+    <script src="js/Tone.js"></script>
+    <script src="js/tone-ui.js"></script>
+    <script src="js/components.js"></script>
+  </head>
+  <body>
+    <style>
+      tone-slider {
+	  width: 100%;
+	  margin-top: 10px;
+      }
+    </style>
+    <h1>
       project name
     </h1>
 
     <div id="buttons">
-		<button id="recordButton">Record</button>
-		<button id="pauseButton" disabled>Pause</button>
-		<button id="stopButton" disabled>Stop</button>
-	  <!-- <button class="record">Record</button>
-	  <button class="pause">Pause</button>
-      <button class="stop">Stop</button> -->
-	</div>
-	<!-- <tone-example label="Microphone">
-		<div slot="explanation">
-			If supported, Tone.UserMedia uses <code>getUserMedia</code> to open the user's microphone where it can then be processed with Tone.js. Only works on https domains.
-		</div>
+      <button id="recordButton">Record</button>
+      <button id="pauseButton" disabled>Pause</button>
+      <button id="stopButton" disabled>Stop</button>
+      <!-- <button class="record">Record</button>
+	   <button class="pause">Pause</button>
+           <button class="stop">Stop</button> -->
+    </div>
+    <!-- <tone-example label="Microphone">
+	 <div slot="explanation">
+	   If supported, Tone.UserMedia uses <code>getUserMedia</code> to open the user's microphone where it can then be processed with Tone.js. Only works on https domains.
+	 </div>
 
-		<div id="content">
-			<tone-mic-button></tone-mic-button>
-		</div>
-	</tone-example> -->
+	 <div id="content">
+	   <tone-mic-button></tone-mic-button>
+	 </div>
+    </tone-example> -->
 
-	<section class="sound-clips"></section>
-	<div id="formats">Format: start recording to see sample rate</div>
-	<p><strong>Recordings:</strong></p>
-  	<ol id="recordingsList"></ol>
+    <section class="sound-clips"></section>
+    <div id="formats">Format: start recording to see sample rate</div>
+    <p><strong>Recordings:</strong></p>
+    <ol id="recordingsList"></ol>
 
-	<tone-example label="Pitch Shift">
-		<tone-loader></tone-loader>
-		<div id="content">
-			<tone-play-toggle></tone-play-toggle>
-			<tone-slider class="pitch" label="pitch" min="-12" max="12" value="0" units="hz"></tone-slider>
-      <tone-slider class="volume" label="volume" min="-12" max="12" value="0" units=""></tone-slider>
-      <tone-slider class="speed" label="speed" min="-12" max="12" value="0" units=""></tone-slider>
-		</div>
-	</tone-example>
+    <tone-example label="Pitch Shift">
+      <tone-loader></tone-loader>
+      <div id="content">
+	<tone-play-toggle></tone-play-toggle>
+	<tone-slider class="pitch" label="pitch" min="-12" max="12" value="0" units="hz"></tone-slider>
+        <tone-slider class="volume" label="volume" min="-12" max="12" value="0" units=""></tone-slider>
+        <tone-slider class="speed" label="speed" min="-12" max="12" value="0" units=""></tone-slider>
+      </div>
+    </tone-example>
 
-  <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
-  <script src="js/record.js"></script>
-	</script>
+    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+    <script src="js/record.js"></script>
+</script>
 
 </body>
 </html>
