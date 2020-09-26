@@ -213,14 +213,10 @@ function createDownloadLink(blob) {
 
 }
 
-// function pitchshifter(upload) {
-// console.log("start pitch");
-audio = new Tone.Player(url).connect(pitchShift); //ここがうまくいきません
-
-  const pitchShift = new Tone.PitchShift().toDestination(); //Connect the output to the context's destination node.
-  console.log("pitchShift");
-
+  const pitchShift = new Tone.PitchShift().toDestination();　//Connect the output to the context's destination node.
+  const player = new Tone.Player(url).connect(pitchShift);
   player.loop = true; //creates a looped callback at the specified interval
+  console.log("url uploaded; starting pitchshift");
 
   const toneFFT = new Tone.FFT(); //Get the current frequency data of the connected audio source using a fast Fourier transform.
   pitchShift.connect(toneFFT); //connect to toneFFT
@@ -240,7 +236,14 @@ audio = new Tone.Player(url).connect(pitchShift); //ここがうまくいきま�
   // 	debugger;
   // });
 
-  document.querySelector("tone-slider").addEventListener("input", e => {
+  document.getElementByClassName("pitch").addEventListener("input", e => {
       pitchShift.pitch = parseFloat(e.target.value);
   });
-// }
+
+  // document.getElementByClassName("volume").addEventListener("input", e => {
+  //     pitchShift.pitch = parseFloat(e.target.value);
+  // });
+  //
+  // document.getElementByClassName("speed").addEventListener("input", e => {
+  //     pitchShift.pitch = parseFloat(e.target.value);
+  // });
