@@ -139,8 +139,7 @@ function stopRecording() {
 
 function createDownloadLink(blob) {
 
-  // url = URL.createObjectURL(blob);
-  url = "https://tonejs.github.io/audio/berklee/groovin_analogsynth1.mp3";
+  url = URL.createObjectURL(blob);
 
   var filename = new Date().toISOString();
 
@@ -214,8 +213,7 @@ function loadedEvent() {
 
 // bind the interface
 document.querySelector("tone-play-toggle").addEventListener("start", () => {
-  const url = "https://tonejs.github.io/audio/berklee/groovin_analogsynth1.mp3";
-
+  console.log(url);
   player = new Tone.Player(url, function(){
     loadedCount ++;
   });
