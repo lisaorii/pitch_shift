@@ -200,14 +200,17 @@ function loadedEvent() {
     return;
   }
 
-  // const pitchShift = new Tone.PitchShift().toDestination();　//Connect the output to the context's destination node.
-  // const toneFFT = new Tone.FFT(); //Get the current frequency data of the connected audio source using a fast Fourier transform.
-  // pitchShift.connect(toneFFT); //connect to toneFFT
-  // fft({
-  //   parent: document.querySelector("#content"),
-  //   tone: toneFFT,
-  // });
-  player.toDestination();
+  const pitchShift = new Tone.PitchShift().toDestination();　//Connect the output to the context's destination node.
+  const toneFFT = new Tone.FFT(); //Get the current frequency data of the connected audio source using a fast Fourier transform.
+  pitchShift.connect(toneFFT); //connect to toneFFT
+  fft({
+    parent: document.querySelector("#content"),
+    tone: toneFFT,
+  });
+
+  pitchShift.pitch = 10.2;
+
+  player.connect(pitchShift);
   player.start();
 }
 
