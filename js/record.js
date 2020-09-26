@@ -192,6 +192,7 @@ function createDownloadLink(blob) {
 
 let loadedCount = 0;
 let player = null;
+let pitchShift = null;
 
 // 音源読み込み後にしたい処理を記述した関数
 function loadedEvent() {
@@ -200,15 +201,13 @@ function loadedEvent() {
     return;
   }
 
-  const pitchShift = new Tone.PitchShift().toDestination();　//Connect the output to the context's destination node.
+  pitchShift = new Tone.PitchShift().toDestination();　//Connect the output to the context's destination node.
   const toneFFT = new Tone.FFT(); //Get the current frequency data of the connected audio source using a fast Fourier transform.
   pitchShift.connect(toneFFT); //connect to toneFFT
   fft({
     parent: document.querySelector("#content"),
     tone: toneFFT,
   });
-
-  pitchShift.pitch = 10.2;
 
   player.connect(pitchShift);
   player.start();
@@ -227,7 +226,6 @@ document.querySelector("tone-play-toggle").addEventListener("start", () => {
 
 document.querySelector("tone-play-toggle").addEventListener("stop", () => player.stop());
 
-// FIXME:
-// document.getElementByClassName("pitch").addEventListener("input", e => {
-//   pitchShift.pitch = parseFloat(e.target.value);
-// });
+document.getElementsByClassName("pitch")[0].addEventListener("input", e => {
+  pitchShift.pitch = parseFloat(e.target.value);
+});
