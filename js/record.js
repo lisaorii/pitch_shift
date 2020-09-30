@@ -214,7 +214,7 @@ function createDownloadLink(blob) {
 }
 
   const pitchShift = new Tone.PitchShift().toDestination();　//Connect the output to the context's destination node.
-  const player = new Tone.Player(url).connect(pitchShift);
+  const player = new Tone.GrainPlayer(url).connect(pitchShift);
   player.loop = true; //creates a looped callback at the specified interval
   console.log("url uploaded; starting pitchshift");
 
