@@ -216,7 +216,7 @@ function loadedEvent() {
 // bind the interface
 document.querySelector("tone-play-toggle").addEventListener("start", () => {
   console.log(url);
-  player = new Tone.Player(url, function(){
+  player = new Tone.GrainPlayer(url, function(){
     loadedCount ++;
   });
   player.loop = true; //creates a looped callback at the specified interval
