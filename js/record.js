@@ -126,13 +126,6 @@ function stopRecording() {
   //stop microphone access
   gumStream.getAudioTracks()[0].stop();
 
-  // var arrayBuffer = new ArrayBuffer(100);
-  // var uint8Array = new Uint8Array(arrayBuffer);
-  // for (var i = 0; i < 100; i++) {
-  //  uint8Array[i] = i;
-  // }
-  // blob = new Blob([uint8Array], {  type: 'audio/ogg; codecs=opus'  });
-
   //create the wav blob and pass it on to createDownloadLink
   rec.exportWAV(createDownloadLink);
 }
@@ -213,6 +206,16 @@ function loadedEvent() {
   player.start();
 }
 
+// function initAudio() {
+// 	audio.src = "audio/Stoker.ogg";
+// 	audio.play();
+// 	var speedlist = document.getElementById("speedlist");
+// 	speedlist.addEventListener("change",changeSpeed);
+// 	function changeSpeed(event){
+// 		audio.playbackRate = event.target.value;
+// 	}
+// }
+
 // bind the interface
 document.querySelector("tone-play-toggle").addEventListener("start", () => {
   console.log(url);
@@ -228,4 +231,8 @@ document.querySelector("tone-play-toggle").addEventListener("stop", () => player
 
 document.getElementsByClassName("pitch")[0].addEventListener("input", e => {
   pitchShift.pitch = parseFloat(e.target.value);
+})
+
+document.getElementsByClassName("speed")[2].addEventListener("input", e => {
+  player.playbackRate = e.target.value;
 });
